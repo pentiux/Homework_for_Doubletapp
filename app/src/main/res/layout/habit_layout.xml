@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/outline_margrin"
+    android:orientation="vertical">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/habit_name"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Habit name wtf" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/habit_description"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_top_margin"
+        tools:text="Описание привычки будет тут, возможно длинное и тп пос dgsd gd fgd fмотрим." />
+
+    <RadioGroup
+        android:id="@+id/habit_layout_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_top_margin"
+        android:orientation="horizontal">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/habit_type_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="@dimen/max_width_for_radio_buttons"
+            android:layout_gravity="center|center"
+            android:text="@string/Type_0"
+            tools:text="sadfgfmvbn vbn ,nm ,bn xcv nxbv nbcv cv dfds sdf gsd gdsf gds fg sf " />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/habit_type_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="@dimen/max_width_for_radio_buttons"
+            android:layout_gravity="center|center"
+            android:text="@string/Type_1"
+            tools:text="Тип 2" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/habit_type_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center"
+            android:maxWidth="@dimen/max_width_for_radio_buttons"
+            android:text="@string/Type_2"
+            tools:text="Тип 3 fgh jfgh jfg hfg hfg h g" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/habit_type_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center"
+            android:maxWidth="@dimen/max_width_for_radio_buttons"
+            android:text="@string/Type_3"
+            tools:text="Тип 4" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_top_margin"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/priority_spinner"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/start_end_margrin16"
+            android:entries="@array/habit_priority_list" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/habitat_frequency"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|center"
+            android:layout_weight="1"
+            tools:text="частота привычки" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/habit_color"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|center"
+            android:layout_weight="1"
+            tools:text="Цвет" />
+
+    </LinearLayout>
+
+</LinearLayout>

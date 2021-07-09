@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- If you and new Item, add to String and array -->
+    <string name="habit_priority_minimal">minimal</string>
+    <string name="habit_priority_low">low</string>
+    <string name="habit_priority_normal">normal</string>
+    <string name="habit_priority_high">high</string>
+    <string name="habit_priority_superior">superior</string>
+    <string-array name="habit_priority_list">
+        <item>@string/habit_priority_minimal</item>
+        <item>@string/habit_priority_low</item>
+        <item>@string/habit_priority_normal</item>
+        <item>@string/habit_priority_high</item>
+        <item>@string/habit_priority_superior</item>
+    </string-array>
+</resources>

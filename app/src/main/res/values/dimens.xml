@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="top_spacer_margrin">12dp</dimen>
+    <dimen name="outline_margrin">8dp</dimen>
+    <dimen name="max_width_for_radio_buttons">100dp</dimen>
+    <dimen name="small_top_margin">6dp</dimen>
+    <dimen name="start_end_margrin16">16dp</dimen>
+</resources>

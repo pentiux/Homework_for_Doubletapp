@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Homework for Doubletapp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_new_habit">Creat new habit</string>
+    <string name="please_enter_habit_name">Please enter habit name.</string>
+    <string name="please_enter_habit_description">Please enter habit description.</string>
+    <string name="color">Color</string>
+    <string name="habit_frequency">Habit frequency</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+</resources>

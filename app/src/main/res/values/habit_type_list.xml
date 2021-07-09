@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- If you and new Item, add to String and array -->
+    <string name="Type_0">Type 1</string>
+    <string name="Type_1">Type 2</string>
+    <string name="Type_2">Type 3</string>
+    <string name="Type_3">Type 4</string>
+    <string-array name="habit_type_list">
+        <item>@string/Type_0</item>
+        <item>@string/Type_1</item>
+        <item>@string/Type_2</item>
+        <item>@string/Type_3</item>
+    </string-array>
+</resources>

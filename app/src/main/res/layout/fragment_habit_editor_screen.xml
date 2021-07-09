@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/outline_margrin"
+        tools:context=".mvvm.HabitEditorScreenFragment">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fhes_habit_name_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/please_enter_habit_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fhes_habit_name_input"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLength="35"
+                android:inputType="textAutoComplete|textCapWords"
+                android:singleLine="true"
+                tools:text="Habit name wtf" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fhes_habit_description"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/top_spacer_margrin"
+            android:layout_weight="1"
+            android:hint="@string/please_enter_habit_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fhes_habit_name_label"
+            app:layout_constraintBottom_toTopOf="@+id/fhes_habit_layout_radio_group"
+            tools:text="Enter habit description">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fhes_habit_description_input"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textMultiLine"
+                android:singleLine="false"
+                tools:text="Some description for descriptiong description in description" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/fhes_habit_layout_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/top_spacer_margrin"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fhes_habit_description">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/habit_type_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Type_0"
+                tools:text="Тип 1" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/habit_type_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Type_1"
+                tools:text="Тип 2" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/habit_type_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Type_2"
+                tools:text="Тип 3" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/habit_type_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Type_3"
+                tools:text="Тип 4" />
+        </RadioGroup>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fhes_habit_color"
+            style="@style/TextAppearance.AppCompat.Display1"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxWidth="40dp"
+            android:text="@string/color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fhes_habit_layout_radio_group"
+            tools:text="Цвет" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/fhes_priority_spinner"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:entries="@array/habit_priority_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fhes_habit_color" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fhes_habitat_frequency"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:maxLength="25"
+            android:hint="@string/habit_frequency"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fhes_priority_spinner"
+            tools:text="частота привычки">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fhes_habitat_frequency_input"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textAutoComplete"
+                android:singleLine="true"
+                tools:text="Habit frequency wtf" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fhes_save_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fhes_habitat_frequency" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fhes_cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fhes_save_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
