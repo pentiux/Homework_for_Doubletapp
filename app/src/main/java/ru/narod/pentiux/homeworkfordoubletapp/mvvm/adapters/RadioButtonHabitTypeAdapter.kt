@@ -5,6 +5,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.core.view.children
+import com.google.android.material.radiobutton.MaterialRadioButton
 import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 
@@ -15,10 +16,10 @@ class RadioButtonHabitTypeAdapter(
     ) {
 
     init {
-        if (!isTypeEmptyOrWrong()) habit.type = context.resources.getStringArray(R.array.habit_type_list)[0]
+        if (isTypeEmptyOrWrong()) habit.type = context.resources.getStringArray(R.array.habit_type_list)[0]
 
         for (view in radioGroup.children) {
-            val radioButton = (view as? com.google.android.material.radiobutton.MaterialRadioButton) ?:
+            val radioButton = (view as? MaterialRadioButton) ?:
                 throw Exception("RadioButtonHabitTypeAdapter, init, radioButton: Wrong view!")
 
             if (radioButton.text == habit.type) {
@@ -30,7 +31,7 @@ class RadioButtonHabitTypeAdapter(
     }
 
     private fun isTypeEmptyOrWrong() =
-        context.resources.getStringArray(R.array.habit_type_list).contains(habit.type)
+        !context.resources.getStringArray(R.array.habit_type_list).contains(habit.type)
 
     private fun radioClickListener(radioButton: RadioButton) { // TODO сделать запись в базу данных
             Toast.makeText(context,
