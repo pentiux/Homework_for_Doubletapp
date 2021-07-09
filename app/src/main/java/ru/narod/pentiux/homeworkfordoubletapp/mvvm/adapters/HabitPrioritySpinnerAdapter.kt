@@ -12,7 +12,7 @@ import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitPriority
 
 class HabitPrioritySpinnerAdapter(
     private val habit: HabitCharacteristicsData,
-    private val spinner: AppCompatSpinner,
+    spinner: AppCompatSpinner,
     private val context: Context
     ) : AdapterView.OnItemSelectedListener{
 
@@ -21,9 +21,8 @@ class HabitPrioritySpinnerAdapter(
             context,
             R.array.habit_priority_list,
             android.R.layout.simple_spinner_item
-        ).also {
-            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = it
+        ).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
         spinner.setSelection(habit.priority.intValue)
     }
