@@ -14,7 +14,7 @@ import ru.narod.pentiux.homeworkfordoubletapp.mvvm.adapters.HabitsListAdapter
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitPriority
 
-internal class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : Fragment(R.layout.fragment_main) {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = checkNotNull(_binding) { "MainFragment _binding isn't initialized!" }
 

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.HabitLayoutBinding
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 
-internal class HabitsListAdapter(
+class HabitsListAdapter(
     private val onItemClicked: (HabitCharacteristicsData) -> Unit
 ): ListAdapter<HabitCharacteristicsData, HabitsListAdapter.HabitsListViewHolder>(DiffCallback) {
 

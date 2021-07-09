@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-internal data class HabitCharacteristicsData(
+data class HabitCharacteristicsData(
     var name: String,
     var description: String,
     var priority: HabitPriority,

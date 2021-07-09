@@ -12,7 +12,7 @@ import ru.narod.pentiux.homeworkfordoubletapp.mvvm.adapters.RadioButtonHabitType
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 
 
-internal class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen) {
+class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen) {
 
     private var _binding: FragmentHabitEditorScreenBinding? = null
     private val binding get() = checkNotNull(_binding) { "MainFragment _binding isn't initialized!" }

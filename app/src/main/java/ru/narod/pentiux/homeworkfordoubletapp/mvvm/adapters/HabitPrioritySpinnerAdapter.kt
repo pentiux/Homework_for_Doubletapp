@@ -10,7 +10,7 @@ import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitPriority
 
-internal class HabitPrioritySpinnerAdapter(
+class HabitPrioritySpinnerAdapter(
     private val habit: HabitCharacteristicsData,
     private val spinner: AppCompatSpinner,
     private val context: Context

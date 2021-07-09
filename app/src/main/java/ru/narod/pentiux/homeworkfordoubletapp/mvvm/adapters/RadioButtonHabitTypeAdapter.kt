@@ -8,7 +8,7 @@ import androidx.core.view.children
 import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 
-internal class RadioButtonHabitTypeAdapter(
+class RadioButtonHabitTypeAdapter(
     radioGroup: RadioGroup,
     private val habit: HabitCharacteristicsData,
     private val context: Context
