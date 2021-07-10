@@ -40,6 +40,46 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 HabitCharacteristicsData(
                     name = "Привычка 2",
                     description = "Описание привычки должно быть тут",
+                    priority = HabitPriority.NORMAL,
+                    type = "Type 1",
+                    frequency = "Раз в день",
+                    color = Color.BLACK
+                ),
+                HabitCharacteristicsData(
+                    name = "Привычка 3",
+                    description = "Описание привычки должно быть тут",
+                    priority = HabitPriority.NORMAL,
+                    type = "Type 1",
+                    frequency = "Раз в день",
+                    color = Color.BLACK
+                ),
+                HabitCharacteristicsData(
+                    name = "Привычка 4",
+                    description = "Описание привычки должно быть тут",
+                    priority = HabitPriority.NORMAL,
+                    type = "Type 1",
+                    frequency = "Раз в день",
+                    color = Color.BLACK
+                ),
+                HabitCharacteristicsData(
+                    name = "Привычка 5",
+                    description = "Описание привычки должно быть тут",
+                    priority = HabitPriority.NORMAL,
+                    type = "Type 1",
+                    frequency = "Раз в день",
+                    color = Color.BLACK
+                ),
+                HabitCharacteristicsData(
+                    name = "Привычка 6",
+                    description = "Описание привычки должно быть тут",
+                    priority = HabitPriority.NORMAL,
+                    type = "Type 1",
+                    frequency = "Раз в день",
+                    color = Color.BLACK
+                ),
+                HabitCharacteristicsData(
+                    name = "Привычка 7",
+                    description = "Описание привычки должно быть тут",
                     priority = HabitPriority.HIGH,
                     type = "Type 2",
                     frequency = "Раз в час",
