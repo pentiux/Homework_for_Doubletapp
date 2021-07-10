@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="ru.narod.pentiux.homeworkfordoubletapp.mvvm.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        android:label="@string/habits_list"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_habitEditorScreen"
             app:destination="@id/habitEditorScreen" />
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/habitEditorScreen"
         android:name="ru.narod.pentiux.homeworkfordoubletapp.mvvm.HabitEditorScreenFragment"
-        android:label="fragment_habit_editor_screen"
+        android:label="@string/habit_editor"
         tools:layout="@layout/fragment_habit_editor_screen" >
         <argument
             android:name="habitCharacteristics"
