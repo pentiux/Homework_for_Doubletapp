@@ -78,7 +78,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|center"
             android:layout_weight="1"
-            android:layout_marginEnd="@dimen/start_end_margrin16" />
+            android:layout_marginEnd="@dimen/start_end_margrin16"
+            android:entries="@array/habit_priority_list"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/habitat_frequency"

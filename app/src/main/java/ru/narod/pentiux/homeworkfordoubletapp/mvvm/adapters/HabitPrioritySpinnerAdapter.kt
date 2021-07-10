@@ -14,20 +14,20 @@ class HabitPrioritySpinnerAdapter(
     private val habit: HabitCharacteristicsData,
     spinner: AppCompatSpinner,
     private val context: Context
-    ) : AdapterView.OnItemSelectedListener{
+    ): AdapterView.OnItemSelectedListener {
+
+    private var firstCall = true
 
     init {
-        spinner.adapter = ArrayAdapter.createFromResource(
-            context,
-            R.array.habit_priority_list,
-            android.R.layout.simple_spinner_item
-        ).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        }
         spinner.setSelection(habit.priority.intValue)
+        spinner.onItemSelectedListener = this
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        if(firstCall) {
+            firstCall = false
+            return
+        }
         for (priority in HabitPriority.values()) {
             if (priority.intValue == position) {
                 Toast.makeText(context, "Priority of ${habit.name} changed on $priority", Toast.LENGTH_SHORT)

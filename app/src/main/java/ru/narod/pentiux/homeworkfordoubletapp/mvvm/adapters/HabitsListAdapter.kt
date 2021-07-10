@@ -30,7 +30,7 @@ class HabitsListAdapter(
         fun bind(habit: HabitCharacteristicsData) = binding.apply {
             habitName.text = habit.name
             habitDescription.text = habit.description
-            prioritySpinner.onItemSelectedListener = HabitPrioritySpinnerAdapter(habit, prioritySpinner, root.context)
+            HabitPrioritySpinnerAdapter(habit, prioritySpinner, root.context)
             RadioButtonHabitTypeAdapter(habitLayoutRadioGroup, habit, root.context)
             habitatFrequency.text = habit.frequency
             habitColor.setBackgroundColor(habit.color)

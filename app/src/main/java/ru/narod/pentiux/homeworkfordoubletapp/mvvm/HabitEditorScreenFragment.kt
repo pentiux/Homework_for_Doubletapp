@@ -30,8 +30,7 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
     }
 
     private fun setSpinnerAndRadio(habit: HabitCharacteristicsData) = binding.run {
-        fhesPrioritySpinner.onItemSelectedListener =
-            HabitPrioritySpinnerAdapter(habit, fhesPrioritySpinner, root.context)
+        HabitPrioritySpinnerAdapter(habit, fhesPrioritySpinner, root.context)
         RadioButtonHabitTypeAdapter(fhesHabitLayoutRadioGroup, habit, root.context)
     }
 
