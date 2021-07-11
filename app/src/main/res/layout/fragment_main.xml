@@ -16,17 +16,17 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:src="@drawable/ic_add_new_habit_icon"
         android:id="@+id/fab_create_new_habit"
-        android:layout_margin="@dimen/outline_margin"
-        app:fabCustomSize="50dp"
-        app:maxImageSize="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/outline_margin"
         android:contentDescription="@string/create_new_habit"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_add_new_habit_icon"
+        app:fabCustomSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_centerHorizontal="true"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="40dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 import ru.narod.pentiux.homeworkfordoubletapp.R
+import ru.narod.pentiux.homeworkfordoubletapp.data.db.HabitsDatabase
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 

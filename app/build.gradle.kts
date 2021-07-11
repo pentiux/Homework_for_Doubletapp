@@ -2,9 +2,9 @@ val extras = rootProject.extra
 
 plugins {
     id("com.android.application")
-    id("dagger.hilt.android.plugin")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
 }
@@ -43,6 +43,10 @@ android {
 kapt {
     correctErrorTypes = true
     useBuildCache = true
+    javacOptions {
+        option("-Adagger.fastInit=ENABLED")
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+    }
 }
 
 dependencies {
