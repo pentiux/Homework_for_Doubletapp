@@ -1,4 +1,3 @@
-@Suppress("UNUSED_PARAMETER")
 buildscript {
     val kotlinVersion by extra("1.5.20")
     val lifecycleVersion by extra( "2.4.0-alpha02")
