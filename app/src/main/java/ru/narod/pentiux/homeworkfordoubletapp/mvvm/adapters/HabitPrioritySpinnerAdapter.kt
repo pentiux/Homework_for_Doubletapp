@@ -3,10 +3,8 @@ package ru.narod.pentiux.homeworkfordoubletapp.mvvm.adapters
 import android.content.Context
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
-import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitPriority
 

@@ -66,4 +66,8 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:${extras["hiltVersion"]}")
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1")
+    // Room
+    implementation("androidx.room:room-runtime:${extras["roomVersion"]}")
+    kapt("androidx.room:room-compiler:${extras["roomVersion"]}")
+    implementation("androidx.room:room-ktx:${extras["roomVersion"]}")
 }
