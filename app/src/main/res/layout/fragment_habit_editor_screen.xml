@@ -18,7 +18,8 @@
             android:hint="@string/please_enter_habit_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fhes_habit_name_input"
@@ -43,6 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fhes_habit_name_label"
             app:layout_constraintBottom_toTopOf="@+id/fhes_habit_layout_radio_group"
+            app:errorEnabled="true"
             tools:text="Enter habit description">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -121,7 +123,7 @@
             android:entries="@array/habit_priority_list"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/fhes_habitat_frequency"
+            android:id="@+id/fhes_habit_frequency"
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -131,16 +133,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fhes_priority_spinner"
+            app:errorEnabled="true"
             tools:text="частота привычки">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fhes_habitat_frequency_input"
+                android:id="@+id/fhes_habit_frequency_input"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textAutoComplete"
                 android:singleLine="true"
                 tools:text="Habit frequency wtf" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -151,7 +155,7 @@
             android:text="@string/save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fhes_habitat_frequency" />
+            app:layout_constraintTop_toBottomOf="@+id/fhes_habit_frequency" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/fhes_cancel_button"

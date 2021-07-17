@@ -10,4 +10,9 @@
     <string name="cancel">Cancel</string>
     <string name="habits_list">Habits list</string>
     <string name="habit_editor">Habit editor</string>
+    <string name="name_is_too_long">Name is too Long(max is %d)</string>
+    <string name="Name_cant_empty">Name can\'t be empty or blank!</string>
+    <string name="description_cant_empty">Description can\'t be empty or black</string>
+    <string name="Frequency_too_long">Frequency is too long(max %d)</string>
+    <string name="frequency_empty">Frequency can\'t be empty!</string>
 </resources>
