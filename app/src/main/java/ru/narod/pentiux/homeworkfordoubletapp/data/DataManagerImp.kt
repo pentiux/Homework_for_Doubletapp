@@ -13,19 +13,18 @@ class DataManagerImp @Inject constructor(private val habitDao: HabitsDao) : Data
 
     override suspend fun insertHabit(habit: HabitCharacteristicsEntity) =
         if (isNameUnique(habit.name)) {
-            println("In DataManager $>{habit.name}<!!!!!!!")
             habitDao.insertHabit(habit)
             HabitDataStateSuccess(HabitListSuccess.INSERTED.message)
         } else HabitDataStateError(HabitListErrors.EXIST.message)
 
     override suspend fun updateHabit(habit: HabitCharacteristicsEntity) =
-        if (isNameUnique(habit.name)) {
+        if (isIdExist(habit.id)) {
             habitDao.updateHabit(habit)
             HabitDataStateSuccess(HabitListSuccess.UPDATED.message)
-        } else HabitDataStateError(HabitListErrors.EXIST.message)
+        } else HabitDataStateError(HabitListErrors.NO_SUCH_NAME.message)
 
     override suspend fun deleteHabit(habit: HabitCharacteristicsEntity)  =
-        if (isNameUnique(habit.name)) {
+        if (!isNameUnique(habit.name)) {
             habitDao.deleteHabit(habit)
             HabitDataStateSuccess(HabitListSuccess.DELETED.message)
         } else HabitDataStateError(HabitListErrors.EXIST.message)
@@ -34,4 +33,5 @@ class DataManagerImp @Inject constructor(private val habitDao: HabitsDao) : Data
         habitDao.getAllHabits()
 
     private fun isNameUnique(name: String) = habitDao.checkNameInTable(name) == 0
+    private fun isIdExist(id: Int) = habitDao.checkId(id) == 1
 }

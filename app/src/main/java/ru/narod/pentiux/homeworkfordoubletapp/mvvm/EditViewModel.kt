@@ -15,28 +15,25 @@ class EditViewModel : ViewModel() {
     private var _saveState  = MutableStateFlow(false)
     val saveState get() = _saveState.asStateFlow()
 
+    var fragmentIsBlank = false
+
     var editorHabit = HabitCharacteristicsData.getEmptyHabit()
-    var name = editorHabit.name
-        set(value) { field = value; editorHabit.name = value}
-    var description = editorHabit.description
-        set(value) { field = value; editorHabit.description = value}
-    var frequency = editorHabit.frequency
-        set(value) { field = value; editorHabit.frequency = value}
+    var openedHabit = HabitCharacteristicsData.getEmptyHabit()
 
     fun checkName() = when {
-        name.length > nameLength -> EditHabitFieldState.TOO_LONG
-        name.isEmpty() || name.isBlank() -> EditHabitFieldState.EMPTY
+        editorHabit.name.length > nameLength -> EditHabitFieldState.TOO_LONG
+        editorHabit.name.isEmpty() || editorHabit.name.isBlank() -> EditHabitFieldState.EMPTY
         else -> EditHabitFieldState.GOOD
     }
 
     fun checkFrequency() = when {
-        frequency.length > frequencyLength -> EditHabitFieldState.TOO_LONG
-        frequency.isEmpty() || frequency.isBlank() -> EditHabitFieldState.EMPTY
+        editorHabit.frequency.length > frequencyLength -> EditHabitFieldState.TOO_LONG
+        editorHabit.frequency.isEmpty() || editorHabit.frequency.isBlank() -> EditHabitFieldState.EMPTY
         else -> EditHabitFieldState.GOOD
     }
 
     fun checkDescription() = when {
-        description.isEmpty() || description.isBlank() -> EditHabitFieldState.EMPTY
+        editorHabit.description.isEmpty() || editorHabit.description.isBlank() -> EditHabitFieldState.EMPTY
         else -> EditHabitFieldState.GOOD
     }
 

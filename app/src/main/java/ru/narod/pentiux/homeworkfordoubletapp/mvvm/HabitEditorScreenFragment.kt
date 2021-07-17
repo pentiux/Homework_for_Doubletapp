@@ -51,9 +51,17 @@ class HabitEditorScreenFragment() : Fragment(R.layout.fragment_habit_editor_scre
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentHabitEditorScreenBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        viewModel.editorHabit = args.habitCharacteristics
+        viewModel.editorHabit = args.habitCharacteristics.also {
+            viewModel.openedHabit = it
+        }
         with(viewModel.editorHabit) {
-            if (isDataEmptyOrBlank()) setSpinnerAndRadio(this) else fillAllFields(this)
+            if (isDataEmptyOrBlank()) {
+                viewModel.fragmentIsBlank = true
+                setSpinnerAndRadio(this)
+            } else {
+                viewModel.fragmentIsBlank = false
+                fillAllFields(this)
+            }
         }
         setDoAfterTextChanged()
 
@@ -79,28 +87,70 @@ class HabitEditorScreenFragment() : Fragment(R.layout.fragment_habit_editor_scre
     }
 
     private fun initializeButtons() {
-        with(binding) {
-            fhesSaveButton.setOnClickListener {
+        saveEditInitializing()
+        binding.fhesCancelButton.setOnClickListener { findNavController().navigateUp() }
+
+        binding.fhesDeleteButton.setOnClickListener {
+            appCoroutineScope.launch(mainDispatcher) {
+                when(mainViewModel.deleteHabit(viewModel.editorHabit)) {
+                    is ModelStateSuccess, is ModelStateData -> {
+                        Toast.makeText(context, getString(R.string.successfully_deleted), Toast.LENGTH_SHORT).show()
+                        findNavController().navigateUp()
+                    }
+                    is ModelStateError -> {
+                        Toast.makeText(context, getString(R.string.no_such_name), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    private fun saveEditInitializing() {//if Fragment is opened by FAB do first else second
+        if (viewModel.fragmentIsBlank) {
+            binding.fhesSaveButton.text = getString(R.string.save)
+            binding.fhesSaveButton.setOnClickListener {
                 appCoroutineScope.launch(mainDispatcher) {
                     when (mainViewModel.insertHabit(viewModel.editorHabit)) {
                         is ModelStateSuccess, is ModelStateData -> {
-                            Toast.makeText(context, getString(R.string.successfully_inserted), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, getString(R.string.successfully_inserted), Toast.LENGTH_SHORT)
+                                .show()
                             findNavController().navigateUp()
                         }
                         is ModelStateError -> {
-                            Toast.makeText(context, getString(R.string.habit_existing), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, getString(R.string.habit_existing), Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
+                }
 
+            }
+
+        } else {
+            binding.fhesSaveButton.text = getString(R.string.apply_on_save_button)
+            binding.fhesSaveButton.setOnClickListener {
+                appCoroutineScope.launch(mainDispatcher) {
+                    when (mainViewModel.updateHabit(viewModel.editorHabit)) {
+                        is ModelStateSuccess, is ModelStateData -> {
+                            Toast.makeText(context, getString(R.string.successfully_inserted), Toast.LENGTH_SHORT)
+                                .show()
+                            findNavController().navigateUp()
+                        }
+                        is ModelStateError -> Toast.makeText(
+                            context,
+                            getString(R.string.no_such_name),
+                            Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
-            fhesCancelButton.setOnClickListener { findNavController().navigateUp() }
         }
     }
 
     private fun setDoAfterTextChanged() = with(binding) {
         fhesHabitNameInput.doAfterTextChanged {
-            viewModel.name = fhesHabitNameInput.text.toString()
+            viewModel.editorHabit.name = fhesHabitNameInput.text.toString()
             viewModel.canWeSave()
             when(viewModel.checkName()) {
                 EditHabitFieldState.GOOD -> fhesHabitNameLabel.error = ""
@@ -110,7 +160,7 @@ class HabitEditorScreenFragment() : Fragment(R.layout.fragment_habit_editor_scre
             }
         }
         fhesHabitDescriptionInput.doAfterTextChanged {
-            viewModel.description = fhesHabitDescriptionInput.text.toString()
+            viewModel.editorHabit.description = fhesHabitDescriptionInput.text.toString()
             viewModel.canWeSave()
             when(viewModel.checkDescription()) {
                 EditHabitFieldState.EMPTY -> fhesHabitDescription.error =
@@ -119,7 +169,7 @@ class HabitEditorScreenFragment() : Fragment(R.layout.fragment_habit_editor_scre
             }
         }
         fhesHabitFrequencyInput.doAfterTextChanged {
-            viewModel.frequency = fhesHabitFrequencyInput.text.toString()
+            viewModel.editorHabit.frequency = fhesHabitFrequencyInput.text.toString()
             viewModel.canWeSave()
             when(viewModel.checkFrequency()) {
                 EditHabitFieldState.GOOD -> fhesHabitFrequency.error = ""

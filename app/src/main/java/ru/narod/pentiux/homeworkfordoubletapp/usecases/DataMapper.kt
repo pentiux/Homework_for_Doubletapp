@@ -11,6 +11,7 @@ class DataMapper @Inject constructor() {
 
     fun fromDataForPresenter(habitEntity: HabitCharacteristicsEntity) =
         HabitCharacteristicsData(
+            id = habitEntity.id,
             name = habitEntity.name,
             description = habitEntity.description,
             type = habitEntity.type,
@@ -21,6 +22,7 @@ class DataMapper @Inject constructor() {
 
     fun fromPresenterForData(habitData: HabitCharacteristicsData) =
         HabitCharacteristicsEntity(
+            id = habitData.id,
             name = habitData.name,
             description = habitData.description,
             type = habitData.type,

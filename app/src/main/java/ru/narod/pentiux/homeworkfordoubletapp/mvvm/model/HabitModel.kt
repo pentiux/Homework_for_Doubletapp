@@ -6,8 +6,6 @@ import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 interface HabitModel {
     fun getAllHabits(): Flow<List<HabitCharacteristicsData>>
 
-    fun getHabit(name: String): ModelState
-
     suspend fun deleteHabit(habit: HabitCharacteristicsData): ModelState
 
     suspend fun insertHabit(habit: HabitCharacteristicsData): ModelState

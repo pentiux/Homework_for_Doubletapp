@@ -17,37 +17,21 @@ class HabitModelImpl @Inject constructor(
     private val mapper: DataMapper
     ) : HabitModel {
 
-    private var habitsList: Map<String, HabitCharacteristicsData> =  mapOf()
-
     override fun getAllHabits(): Flow<List<HabitCharacteristicsData>> =
-        dbManager.getAllHabits().map { it.map { habit -> mapper.fromDataForPresenter(habit) } }.apply {
-            map { habitsList = it.map { data -> data.name to data }.toMap() }
-        }
-
-    override fun getHabit(name: String): ModelState =
-        if (checkName(name)) {
-            val habit = habitsList[name]
-            if (habit != null) {
-                ModelStateData(habit)
-            } else ModelStateError(HabitListErrors.NO_SUCH_NAME.message)
-        } else ModelStateError(HabitListErrors.NO_SUCH_NAME.message)
+        dbManager.getAllHabits().map { it.map { habit -> mapper.fromDataForPresenter(habit) } }
 
     override suspend fun deleteHabit(habit: HabitCharacteristicsData): ModelState =
-        if(checkName(habit.name)) convertState(dbManager.deleteHabit(mapper.fromPresenterForData(habit)))
-        else ModelStateError(HabitListErrors.NO_SUCH_NAME.message)
+        convertState(dbManager.deleteHabit(mapper.fromPresenterForData(habit)))
 
     override suspend fun insertHabit(habit: HabitCharacteristicsData): ModelState =
-        if (!checkName(habit.name)) convertState(dbManager.insertHabit(mapper.fromPresenterForData(habit)))
-        else ModelStateError(HabitListErrors.NO_SUCH_NAME.message)
+        convertState(dbManager.insertHabit(mapper.fromPresenterForData(habit)))
+
 
     override suspend fun updateHabit(habit: HabitCharacteristicsData): ModelState =
-        if (checkName(habit.name)) convertState(dbManager.updateHabit(mapper.fromPresenterForData(habit)))
-        else ModelStateError(HabitListErrors.NO_SUCH_NAME.message)
-
-    private fun checkName(name: String): Boolean = habitsList.containsKey(name)
+        convertState(dbManager.updateHabit(mapper.fromPresenterForData(habit)))
 
     private fun convertState(dataState: HabitDataStates): ModelState =
-        when (dataState) {
+         when (dataState) {
             is HabitDataStateSuccess -> ModelStateSuccess(dataState.message)
             is HabitDataStateError -> ModelStateError(dataState.errorMessage)
         }

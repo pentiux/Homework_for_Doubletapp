@@ -7,10 +7,10 @@ import ru.narod.pentiux.homeworkfordoubletapp.data.entities.HabitCharacteristics
 @Dao
 interface HabitsDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHabit(habit: HabitCharacteristicsEntity)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateHabit(habit: HabitCharacteristicsEntity)
 
     @Delete
@@ -18,6 +18,9 @@ interface HabitsDao {
 
     @Query("SELECT COUNT(name) FROM habit_characteristics WHERE name = :name")
     fun checkNameInTable(name: String): Int
+
+    @Query("SELECT COUNT(id) FROM habit_characteristics WHERE id = :id")
+    fun checkId(id: Int): Int
 
     @Query("SELECT * FROM habit_characteristics")
     fun getAllHabits(): Flow<List<HabitCharacteristicsEntity>>

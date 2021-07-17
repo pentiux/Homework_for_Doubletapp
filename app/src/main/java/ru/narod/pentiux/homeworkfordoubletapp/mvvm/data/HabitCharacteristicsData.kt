@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class HabitCharacteristicsData(
+    val id: Int,
     var name: String,
     var description: String,
     var priority: HabitPriority,
@@ -19,7 +20,7 @@ data class HabitCharacteristicsData(
 
     companion object {
         fun getEmptyHabit() = HabitCharacteristicsData(
-            "", "", HabitPriority.NORMAL, "", "", 0
+            0,"", "", HabitPriority.NORMAL, "", "", 0
         )
     }
 }

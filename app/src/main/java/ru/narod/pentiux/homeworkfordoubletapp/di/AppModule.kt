@@ -26,7 +26,7 @@ internal object AppModule {
         Room.databaseBuilder(
             applicationContext,
             HabitsDatabase::class.java,
-            "habits_database"
+            "habits_database1"
         ).fallbackToDestructiveMigration().build()
 
     @Singleton

@@ -12,4 +12,5 @@ interface DataManager {
     suspend fun deleteHabit(habit: HabitCharacteristicsEntity) : HabitDataStates
 
     fun getAllHabits(): Flow<List<HabitCharacteristicsEntity>>
+
 }
