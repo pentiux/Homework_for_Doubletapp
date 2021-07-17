@@ -3,6 +3,8 @@ package ru.narod.pentiux.homeworkfordoubletapp.data
 import kotlinx.coroutines.flow.Flow
 import ru.narod.pentiux.homeworkfordoubletapp.data.dao.HabitsDao
 import ru.narod.pentiux.homeworkfordoubletapp.data.entities.HabitCharacteristicsEntity
+import ru.narod.pentiux.homeworkfordoubletapp.usecases.HabitListErrors
+import ru.narod.pentiux.homeworkfordoubletapp.usecases.HabitListSuccess
 import javax.inject.Inject
 
 class DataManagerImp @Inject constructor(private val habitDao: HabitsDao) : DataManager {
@@ -10,20 +12,20 @@ class DataManagerImp @Inject constructor(private val habitDao: HabitsDao) : Data
     override suspend fun insertHabit(habit: HabitCharacteristicsEntity) =
         if (isNameUnique(habit.name)) {
             habitDao.insertHabit(habit)
-            HabitSuccess("Habit was successfully inserted")
-        } else HabitError("Habit is already exist")
+            HabitDataStateSuccess(HabitListSuccess.INSERTED.message)
+        } else HabitDataStateError(HabitListErrors.EXIST.message)
 
     override suspend fun updateHabit(habit: HabitCharacteristicsEntity) =
         if (isNameUnique(habit.name)) {
             habitDao.updateHabit(habit)
-            HabitSuccess("Habit was successfully updated.")
-        } else HabitError("No such habit name.")
+            HabitDataStateSuccess(HabitListSuccess.UPDATED.message)
+        } else HabitDataStateError(HabitListErrors.EXIST.message)
 
     override suspend fun deleteHabit(habit: HabitCharacteristicsEntity)  =
         if (isNameUnique(habit.name)) {
             habitDao.deleteHabit(habit)
-            HabitSuccess("Habit was successfully deleted")
-        } else HabitError("No such habit name.")
+            HabitDataStateSuccess(HabitListSuccess.DELETED.message)
+        } else HabitDataStateError(HabitListErrors.EXIST.message)
 
     override fun getAllHabits(): Flow<List<HabitCharacteristicsEntity>> =
         habitDao.getAllHabits()

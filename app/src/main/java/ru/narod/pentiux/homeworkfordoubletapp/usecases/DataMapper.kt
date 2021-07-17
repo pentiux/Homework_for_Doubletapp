@@ -3,8 +3,9 @@ package ru.narod.pentiux.homeworkfordoubletapp.usecases
 import ru.narod.pentiux.homeworkfordoubletapp.data.entities.HabitCharacteristicsEntity
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitPriority
+import javax.inject.Inject
 
-class DataMapper {
+class DataMapper @Inject constructor() {
 
     fun fromDataForPresenter(habitEntity: HabitCharacteristicsEntity) =
         HabitCharacteristicsData(

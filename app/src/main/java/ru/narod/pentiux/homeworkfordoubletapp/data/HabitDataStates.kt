@@ -1,5 +1,5 @@
 package ru.narod.pentiux.homeworkfordoubletapp.data
 
 sealed class HabitDataStates
-class HabitSuccess(val message: String) : HabitDataStates()
-class HabitError(val errorMessage: String) : HabitDataStates()
+class HabitDataStateSuccess(val message: String) : HabitDataStates()
+class HabitDataStateError(val errorMessage: String) : HabitDataStates()
