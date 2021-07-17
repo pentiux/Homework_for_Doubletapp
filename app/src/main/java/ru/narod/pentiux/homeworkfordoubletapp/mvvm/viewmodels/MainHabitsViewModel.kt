@@ -1,4 +1,4 @@
-package ru.narod.pentiux.homeworkfordoubletapp.mvvm
+package ru.narod.pentiux.homeworkfordoubletapp.mvvm.viewmodels
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

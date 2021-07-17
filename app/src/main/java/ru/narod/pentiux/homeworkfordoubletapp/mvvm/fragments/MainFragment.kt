@@ -1,4 +1,4 @@
-package ru.narod.pentiux.homeworkfordoubletapp.mvvm
+package ru.narod.pentiux.homeworkfordoubletapp.mvvm.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.FragmentMainBinding
+import ru.narod.pentiux.homeworkfordoubletapp.mvvm.viewmodels.MainHabitsViewModel
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.adapters.HabitsListAdapter
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.utils.repeatOnLifecycle

@@ -1,4 +1,4 @@
-package ru.narod.pentiux.homeworkfordoubletapp.mvvm
+package ru.narod.pentiux.homeworkfordoubletapp.mvvm.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -19,6 +19,7 @@ import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.FragmentHabitEditorScreenBinding
 import ru.narod.pentiux.homeworkfordoubletapp.di.coroutines.ApplicationScope
 import ru.narod.pentiux.homeworkfordoubletapp.di.coroutines.MainDispatcher
+import ru.narod.pentiux.homeworkfordoubletapp.mvvm.viewmodels.MainHabitsViewModel
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.adapters.HabitPrioritySpinnerAdapter
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.adapters.RadioButtonHabitTypeAdapter
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.EditHabitFieldState
@@ -27,10 +28,13 @@ import ru.narod.pentiux.homeworkfordoubletapp.mvvm.model.ModelStateData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.model.ModelStateError
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.model.ModelStateSuccess
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.utils.repeatOnLifecycle
+import ru.narod.pentiux.homeworkfordoubletapp.mvvm.viewmodels.EditViewModel
+import ru.narod.pentiux.homeworkfordoubletapp.mvvm.viewmodels.frequencyLength
+import ru.narod.pentiux.homeworkfordoubletapp.mvvm.viewmodels.nameLength
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HabitEditorScreenFragment() : Fragment(R.layout.fragment_habit_editor_screen) {
+class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen) {
 
     @ApplicationScope
     @Inject
