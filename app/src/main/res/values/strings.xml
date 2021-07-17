@@ -15,4 +15,10 @@
     <string name="description_cant_empty">Description can\'t be empty or black</string>
     <string name="Frequency_too_long">Frequency is too long(max %d)</string>
     <string name="frequency_empty">Frequency can\'t be empty!</string>
+    <string name="successfully_inserted">"Habit was successfully inserted!"</string>
+    <string name="successfully_updated">UPDATED("Habit was successfully updated!"</string>
+    <string name="successfully_deleted">DELETED("Habit was successfully deleted!"</string>
+    <string name="no_such_name">"No such habit name."</string>
+    <string name="habit_existing">"Habit is already exist"</string>
+    <string name="delete">Delete</string>
 </resources>

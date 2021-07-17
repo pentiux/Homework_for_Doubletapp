@@ -11,6 +11,7 @@ import ru.narod.pentiux.homeworkfordoubletapp.data.db.HabitsDatabase
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.ActivityMainBinding
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController

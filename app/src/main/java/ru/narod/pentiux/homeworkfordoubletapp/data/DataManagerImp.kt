@@ -6,11 +6,14 @@ import ru.narod.pentiux.homeworkfordoubletapp.data.entities.HabitCharacteristics
 import ru.narod.pentiux.homeworkfordoubletapp.usecases.HabitListErrors
 import ru.narod.pentiux.homeworkfordoubletapp.usecases.HabitListSuccess
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class DataManagerImp @Inject constructor(private val habitDao: HabitsDao) : DataManager {
 
     override suspend fun insertHabit(habit: HabitCharacteristicsEntity) =
         if (isNameUnique(habit.name)) {
+            println("In DataManager $>{habit.name}<!!!!!!!")
             habitDao.insertHabit(habit)
             HabitDataStateSuccess(HabitListSuccess.INSERTED.message)
         } else HabitDataStateError(HabitListErrors.EXIST.message)

@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.FragmentMainBinding
@@ -15,6 +16,7 @@ import ru.narod.pentiux.homeworkfordoubletapp.mvvm.adapters.HabitsListAdapter
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.utils.repeatOnLifecycle
 
+@AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = checkNotNull(_binding) { "MainFragment _binding isn't initialized!" }

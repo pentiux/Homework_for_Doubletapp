@@ -4,7 +4,9 @@ import ru.narod.pentiux.homeworkfordoubletapp.data.entities.HabitCharacteristics
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitPriority
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class DataMapper @Inject constructor() {
 
     fun fromDataForPresenter(habitEntity: HabitCharacteristicsEntity) =

@@ -1,21 +1,44 @@
 package ru.narod.pentiux.homeworkfordoubletapp.mvvm
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.FragmentHabitEditorScreenBinding
+import ru.narod.pentiux.homeworkfordoubletapp.di.coroutines.ApplicationScope
+import ru.narod.pentiux.homeworkfordoubletapp.di.coroutines.MainDispatcher
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.adapters.HabitPrioritySpinnerAdapter
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.adapters.RadioButtonHabitTypeAdapter
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.EditHabitFieldState
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
+import ru.narod.pentiux.homeworkfordoubletapp.mvvm.model.ModelStateData
+import ru.narod.pentiux.homeworkfordoubletapp.mvvm.model.ModelStateError
+import ru.narod.pentiux.homeworkfordoubletapp.mvvm.model.ModelStateSuccess
+import ru.narod.pentiux.homeworkfordoubletapp.mvvm.utils.repeatOnLifecycle
+import javax.inject.Inject
 
+@AndroidEntryPoint
+class HabitEditorScreenFragment() : Fragment(R.layout.fragment_habit_editor_screen) {
 
-class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen) {
+    @ApplicationScope
+    @Inject
+    lateinit var appCoroutineScope: CoroutineScope
+
+    @MainDispatcher
+    @Inject
+    lateinit var mainDispatcher: CoroutineDispatcher
 
     private var _binding: FragmentHabitEditorScreenBinding? = null
     private val binding get() = checkNotNull(_binding) { "MainFragment _binding isn't initialized!" }
@@ -24,14 +47,22 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
     private val viewModel: EditViewModel by viewModels()
     private val args: HabitEditorScreenFragmentArgs by navArgs()
 
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentHabitEditorScreenBinding.bind(view)
+        super.onViewCreated(view, savedInstanceState)
         viewModel.editorHabit = args.habitCharacteristics
         with(viewModel.editorHabit) {
             if (isDataEmptyOrBlank()) setSpinnerAndRadio(this) else fillAllFields(this)
         }
+        setDoAfterTextChanged()
 
-        super.onViewCreated(view, savedInstanceState)
+        viewModel.saveState.onEach {
+            binding.fhesSaveButton.isEnabled = it
+        }.repeatOnLifecycle(viewLifecycleOwner)
+
+        initializeButtons()
+        viewModel.canWeSave()
     }
 
     private fun setSpinnerAndRadio(habit: HabitCharacteristicsData) = binding.run {
@@ -48,14 +79,29 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
     }
 
     private fun initializeButtons() {
-        //TODO сохранение в базу по нажатии на Save
-        //TODO выход назад по нажатии на Cancel
-        //TODO проверка всели поля заполнены
+        with(binding) {
+            fhesSaveButton.setOnClickListener {
+                appCoroutineScope.launch(mainDispatcher) {
+                    when (mainViewModel.insertHabit(viewModel.editorHabit)) {
+                        is ModelStateSuccess, is ModelStateData -> {
+                            Toast.makeText(context, getString(R.string.successfully_inserted), Toast.LENGTH_SHORT).show()
+                            findNavController().navigateUp()
+                        }
+                        is ModelStateError -> {
+                            Toast.makeText(context, getString(R.string.habit_existing), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+            }
+            fhesCancelButton.setOnClickListener { findNavController().navigateUp() }
+        }
     }
 
     private fun setDoAfterTextChanged() = with(binding) {
         fhesHabitNameInput.doAfterTextChanged {
             viewModel.name = fhesHabitNameInput.text.toString()
+            viewModel.canWeSave()
             when(viewModel.checkName()) {
                 EditHabitFieldState.GOOD -> fhesHabitNameLabel.error = ""
                 EditHabitFieldState.TOO_LONG -> fhesHabitNameLabel.error =
@@ -65,6 +111,7 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
         }
         fhesHabitDescriptionInput.doAfterTextChanged {
             viewModel.description = fhesHabitDescriptionInput.text.toString()
+            viewModel.canWeSave()
             when(viewModel.checkDescription()) {
                 EditHabitFieldState.EMPTY -> fhesHabitDescription.error =
                     getString(R.string.description_cant_empty)
@@ -72,7 +119,8 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
             }
         }
         fhesHabitFrequencyInput.doAfterTextChanged {
-            viewModel.frequency = fhesHabitDescriptionInput.text.toString()
+            viewModel.frequency = fhesHabitFrequencyInput.text.toString()
+            viewModel.canWeSave()
             when(viewModel.checkFrequency()) {
                 EditHabitFieldState.GOOD -> fhesHabitFrequency.error = ""
                 EditHabitFieldState.TOO_LONG -> fhesHabitFrequency.error =

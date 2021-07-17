@@ -1,5 +1,6 @@
 package ru.narod.pentiux.homeworkfordoubletapp.mvvm
 
+import android.graphics.ColorSpace
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -7,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import ru.narod.pentiux.homeworkfordoubletapp.di.coroutines.IoDispatcher
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.model.*
+import ru.narod.pentiux.homeworkfordoubletapp.usecases.HabitListErrors
 import ru.narod.pentiux.homeworkfordoubletapp.usecases.HabitListSuccess
 import javax.inject.Inject
 
@@ -25,7 +27,7 @@ class MainHabitsViewModel @Inject constructor(
     }
 
     suspend fun insertHabit(habit: HabitCharacteristicsData): ModelState = withContext(ioDispatcher) {
-        habitModel.deleteHabit(habit)
+        habitModel.insertHabit(habit)
     }
     suspend fun updateHabit(habit: HabitCharacteristicsData): ModelState = withContext(ioDispatcher) {
         habitModel.deleteHabit(habit)
