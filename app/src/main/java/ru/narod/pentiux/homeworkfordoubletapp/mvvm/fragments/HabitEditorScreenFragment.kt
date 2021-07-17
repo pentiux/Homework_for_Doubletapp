@@ -74,7 +74,16 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
         }.repeatOnLifecycle(viewLifecycleOwner)
 
         initializeButtons()
+        initializeColor()
         viewModel.canWeSave()
+    }
+
+    private fun initializeColor() {
+        binding.fhesHabitColor.setOnClickListener {
+            val action = HabitEditorScreenFragmentDirections
+                .actionHabitEditorScreenToEditColorFragment(viewModel.editorHabit.color)
+            findNavController().navigate(action)
+        }
     }
 
     private fun setSpinnerAndRadio(habit: HabitCharacteristicsData) = binding.run {
