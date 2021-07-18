@@ -61,7 +61,7 @@ class EditColorFragment : Fragment(R.layout.fragment_color_edit) {
     private fun setViewBackground() {
         val rainbow = GradientDrawable(
             GradientDrawable.Orientation.LEFT_RIGHT,
-            intArrayOf(Color.RED, Color.MAGENTA, Color.BLUE, Color.CYAN, Color.GREEN, Color.YELLOW, Color.RED)
+            intArrayOf(Color.BLACK, Color.WHITE, Color.RED, Color.MAGENTA, Color.BLUE, Color.CYAN, Color.GREEN, Color.YELLOW, Color.RED)
         )
         binding.view1.background = rainbow
     }
