@@ -1,6 +1,6 @@
 # Homework_for_Doubletapp</br>
 Trying to do homework for that course</br>
-actual on 17.07.20021</br>
+actual on 18.07.20021</br>
 Technology:</br>
 trying to understang clean architecture</br>
 Room, Flow + coroutines, Hilt</br>
