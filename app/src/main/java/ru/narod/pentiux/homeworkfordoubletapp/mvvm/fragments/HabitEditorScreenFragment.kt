@@ -48,16 +48,14 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
     private val binding get() = checkNotNull(_binding) { "MainFragment _binding isn't initialized!" }
 
     private val mainViewModel: MainHabitsViewModel by activityViewModels()
-    private val viewModel: EditViewModel by viewModels()
+    private val viewModel: EditViewModel by activityViewModels()
     private val args: HabitEditorScreenFragmentArgs by navArgs()
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentHabitEditorScreenBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        viewModel.editorHabit = args.habitCharacteristics.also {
-            viewModel.openedHabit = it
-        }
+        viewModel.editorHabit = args.habitCharacteristics
         with(viewModel.editorHabit) {
             if (isDataEmptyOrBlank()) {
                 viewModel.fragmentIsBlank = true

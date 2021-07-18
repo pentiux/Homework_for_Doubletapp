@@ -18,7 +18,7 @@ class EditViewModel : ViewModel() {
     var fragmentIsBlank = false
 
     var editorHabit = HabitCharacteristicsData.getEmptyHabit()
-    var openedHabit = HabitCharacteristicsData.getEmptyHabit()
+    var tempColor = 0
 
     fun checkName() = when {
         editorHabit.name.length > nameLength -> EditHabitFieldState.TOO_LONG

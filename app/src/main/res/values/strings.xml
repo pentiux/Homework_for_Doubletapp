@@ -22,4 +22,5 @@
     <string name="habit_existing">"Habit is already exist"</string>
     <string name="delete">Delete</string>
     <string name="apply_on_save_button">Apply</string>
+    <string name="pick_a_color">Pick a color:</string>
 </resources>
