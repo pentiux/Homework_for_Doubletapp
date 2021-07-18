@@ -35,4 +35,9 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutApp"
+        android:name="ru.narod.pentiux.homeworkfordoubletapp.mvvm.fragments.AboutApp"
+        android:label="fragment_about_app"
+        tools:layout="@layout/fragment_about_app" />
 </navigation>

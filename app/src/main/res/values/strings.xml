@@ -23,4 +23,8 @@
     <string name="delete">Delete</string>
     <string name="apply_on_save_button">Apply</string>
     <string name="pick_a_color">Pick a color:</string>
+    <string name="about_this_app">About this app</string>
+    <string name="content_description">content description</string>
+    <string name="textview_1">textview 1</string>
+    <string name="textview_2">textview 2</string>
 </resources>

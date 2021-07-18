@@ -16,7 +16,7 @@ data class HabitCharacteristicsData(
 ) : Parcelable {
 
     fun isDataEmptyOrBlank() =
-        name.isBlank() && description.isBlank() && type.isBlank() && frequency.isBlank()
+        name.isBlank() && description.isBlank() && frequency.isBlank()
 
     companion object {
         fun getEmptyHabit() = HabitCharacteristicsData(

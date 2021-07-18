@@ -56,6 +56,24 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
         _binding = FragmentHabitEditorScreenBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         viewModel.editorHabit = args.habitCharacteristics
+        setDoAfterTextChanged()
+        fragmentInitialization()
+
+        viewModel.saveState.onEach {
+            binding.fhesSaveButton.isEnabled = it
+        }.repeatOnLifecycle(viewLifecycleOwner)
+
+        initializeButtons()
+        initializeColor()
+        viewModel.canWeSave()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fragmentInitialization()
+    }
+
+    private fun fragmentInitialization(){
         with(viewModel.editorHabit) {
             if (isDataEmptyOrBlank()) {
                 viewModel.fragmentIsBlank = true
@@ -65,15 +83,9 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
                 fillAllFields(this)
             }
         }
-        setDoAfterTextChanged()
-
-        viewModel.saveState.onEach {
-            binding.fhesSaveButton.isEnabled = it
-        }.repeatOnLifecycle(viewLifecycleOwner)
-
-        initializeButtons()
-        initializeColor()
-        viewModel.canWeSave()
+        checkDescription()
+        checkFrequency()
+        checkName()
     }
 
     private fun initializeColor() {
@@ -163,32 +175,39 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
         fhesHabitNameInput.doAfterTextChanged {
             viewModel.editorHabit.name = fhesHabitNameInput.text.toString()
             viewModel.canWeSave()
-            when(viewModel.checkName()) {
-                EditHabitFieldState.GOOD -> fhesHabitNameLabel.error = ""
-                EditHabitFieldState.TOO_LONG -> fhesHabitNameLabel.error =
-                    getString(R.string.name_is_too_long, nameLength)
-                EditHabitFieldState.EMPTY -> fhesHabitNameLabel.error = getString(R.string.Name_cant_empty)
-            }
+            checkName()
         }
         fhesHabitDescriptionInput.doAfterTextChanged {
             viewModel.editorHabit.description = fhesHabitDescriptionInput.text.toString()
             viewModel.canWeSave()
-            when(viewModel.checkDescription()) {
-                EditHabitFieldState.EMPTY -> fhesHabitDescription.error =
-                    getString(R.string.description_cant_empty)
-                else -> fhesHabitDescription.error = ""
-            }
+            checkDescription()
         }
         fhesHabitFrequencyInput.doAfterTextChanged {
             viewModel.editorHabit.frequency = fhesHabitFrequencyInput.text.toString()
             viewModel.canWeSave()
-            when(viewModel.checkFrequency()) {
-                EditHabitFieldState.GOOD -> fhesHabitFrequency.error = ""
-                EditHabitFieldState.TOO_LONG -> fhesHabitFrequency.error =
-                    getString(R.string.Frequency_too_long, frequencyLength)
-                EditHabitFieldState.EMPTY -> fhesHabitFrequency.error = getString(R.string.frequency_empty)
-            }
+            checkFrequency()
         }
+    }
+
+    private fun checkName() = when(viewModel.checkName()) {
+        EditHabitFieldState.GOOD -> binding.fhesHabitNameLabel.error = ""
+        EditHabitFieldState.TOO_LONG -> binding.fhesHabitNameLabel.error =
+            getString(R.string.name_is_too_long, nameLength)
+        EditHabitFieldState.EMPTY -> binding.fhesHabitNameLabel.error = getString(R.string.Name_cant_empty)
+    }
+
+
+    private fun checkDescription() = when(viewModel.checkDescription()) {
+        EditHabitFieldState.EMPTY -> binding.fhesHabitDescription.error =
+            getString(R.string.description_cant_empty)
+        else -> binding.fhesHabitDescription.error = ""
+    }
+
+    private fun checkFrequency() = when(viewModel.checkFrequency()) {
+        EditHabitFieldState.GOOD -> binding.fhesHabitFrequency.error = ""
+        EditHabitFieldState.TOO_LONG -> binding.fhesHabitFrequency.error =
+            getString(R.string.Frequency_too_long, frequencyLength)
+        EditHabitFieldState.EMPTY -> binding.fhesHabitFrequency.error = getString(R.string.frequency_empty)
     }
 
     override fun onDestroy() {
