@@ -19,6 +19,6 @@ presenter aka mvvm</br>
 usecases</br>
 </br>
 in future:</br>
-Pick color from colorscroll</br>
 changing type and priority on main screen make affects</br>
+Test</br>
 photos of creens</br>
