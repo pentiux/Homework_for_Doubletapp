@@ -1,44 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_fragment_bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bottom_dialog_back"
     android:orientation="vertical"
     android:padding="2dp"
-    android:paddingBottom="16dp"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="18dp"
+    app:behavior_peekHeight="78dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <TextView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_create_new_habit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/cardview_default_radius"
+        android:contentDescription="@string/create_new_habit"
+        android:src="@drawable/ic_add_new_habit_icon"
+        app:fabCustomSize="50dp"
+        app:layout_anchorGravity="bottom|end"
+        android:layout_gravity="end|bottom"
+        app:maxImageSize="40dp"/>
+
+    <LinearLayout
+        android:id="@+id/main_fragment_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center|top"
-        android:text="@string/search_and_sorting"/>
+        android:background="@drawable/bottom_dialog_back"
+        android:orientation="vertical"
+        android:padding="2dp"
+        android:paddingBottom="16dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/search_by_habit_name">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/search_edit"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
-            android:maxLines="1"/>
+            android:gravity="center|top"
+            android:text="@string/search_and_sorting"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_by_habit_name">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start|top"
-        android:paddingStart="4dp"
-        android:text="asdasfasf\nasfsdg\ndfgsdfgdsf\ndf"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|top"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="asdasfasf\nasfsdg\ndfgsdfgdsf\ndf"/>
+    </LinearLayout>
 
 
 </LinearLayout>

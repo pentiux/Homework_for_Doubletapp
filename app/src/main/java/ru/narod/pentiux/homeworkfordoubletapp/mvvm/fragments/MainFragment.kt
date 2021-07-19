@@ -43,7 +43,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             adapter = habitsListAdapter
         }
 
-        binding.fabCreateNewHabit.setOnClickListener {
+        binding.includeBottomSheet.fabCreateNewHabit.setOnClickListener {
             goToHabitEditor(HabitCharacteristicsData.getEmptyHabit())
         }
     }
