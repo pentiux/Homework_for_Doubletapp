@@ -27,4 +27,6 @@
     <string name="content_description">content description</string>
     <string name="textview_1">textview 1</string>
     <string name="textview_2">textview 2</string>
+    <string name="search_by_habit_name">Search by habit name.</string>
+    <string name="search_and_sorting">^ Search and sorting ^</string>
 </resources>
