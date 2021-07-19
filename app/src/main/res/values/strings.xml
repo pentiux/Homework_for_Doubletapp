@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Homework for Doubletapp</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="create_new_habit">Creat new habit</string>
+    <string name="create_new_habit">Create new habit</string>
     <string name="please_enter_habit_name">Please enter habit name.</string>
     <string name="please_enter_habit_description">Please enter habit description.</string>
     <string name="color">Color</string>
@@ -29,4 +29,12 @@
     <string name="textview_2">textview 2</string>
     <string name="search_by_habit_name">Search by habit name.</string>
     <string name="search_and_sorting">^ Search and sorting ^</string>
+
+    <!--    sorting in main bottom sheet-->
+    <string name="sort_by">Sort:</string>
+    <string name="by_name">By name</string>
+    <string name="by_type">By Type</string>
+    <string name="by_priority">By Priority</string>
+    <string name="by_color">By Color</string>
+
 </resources>
