@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.retry
 import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.FragmentMainBinding
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.viewmodels.MainHabitsViewModel
@@ -24,6 +25,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: MainHabitsViewModel by activityViewModels()
 
+    private lateinit var habitsListAdapter: HabitsListAdapter
     private var _recyclerView: RecyclerView? = null
     private val recyclerView get() = checkNotNull(_recyclerView) { "MainFragment _recyclerView isn't initialized!" }
 
@@ -32,9 +34,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainBinding.bind(view)
 
-        val habitsListAdapter = HabitsListAdapter { goToHabitEditor(it) }
+        habitsListAdapter = HabitsListAdapter { goToHabitEditor(it) }
 
-       viewModel.getAllHabits().onEach {
+       viewModel.resultList.onEach {
            habitsListAdapter.submitList(it)
        }.repeatOnLifecycle(viewLifecycleOwner)
 
@@ -45,6 +47,28 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         binding.includeBottomSheet.fabCreateNewHabit.setOnClickListener {
             goToHabitEditor(HabitCharacteristicsData.getEmptyHabit())
+        }
+        setClickListeners()
+    }
+
+    private fun setClickListeners() {
+        with(binding.includeBottomSheet) {
+            sortByName.setOnClickListener {
+                viewModel.flags["sortByName"] = sortByName.isChecked
+                viewModel.updateHabitsList()
+            }
+            sortByType.setOnClickListener {
+                viewModel.flags["sortByType"] = sortByType.isChecked
+                viewModel.updateHabitsList()
+            }
+            sortByPriority.setOnClickListener {
+                viewModel.flags["sortByPriority"]  = sortByPriority.isChecked
+                viewModel.updateHabitsList()
+            }
+            sortByColor.setOnClickListener {
+                viewModel.flags["sortByColor"]  = sortByColor.isChecked
+                viewModel.updateHabitsList()
+            }
         }
     }
 
