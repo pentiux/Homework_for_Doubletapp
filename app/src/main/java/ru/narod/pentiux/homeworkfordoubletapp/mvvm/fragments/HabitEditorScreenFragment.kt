@@ -70,17 +70,18 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
 
     override fun onResume() {
         super.onResume()
-        fragmentInitialization()
+        fillAllFields(viewModel.editorHabit)
+        saveEditInitializing()
     }
 
     private fun fragmentInitialization(){
-        with(viewModel.editorHabit) {
-            if (isDataEmptyOrBlank()) {
+        with(args.habitCharacteristics) {
+            if (id == 0) {
                 viewModel.fragmentIsBlank = true
-                setSpinnerAndRadio(this)
+                setSpinnerAndRadio(viewModel.editorHabit)
             } else {
                 viewModel.fragmentIsBlank = false
-                fillAllFields(this)
+                fillAllFields(viewModel.editorHabit)
             }
         }
         checkDescription()
@@ -110,7 +111,6 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
     }
 
     private fun initializeButtons() {
-        saveEditInitializing()
         binding.fhesCancelButton.setOnClickListener { findNavController().navigateUp() }
 
         binding.fhesDeleteButton.setOnClickListener {
@@ -130,7 +130,7 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
 
 
 
-    private fun saveEditInitializing() {//if Fragment is opened by FAB do first else second
+    private fun saveEditInitializing() {
         if (viewModel.fragmentIsBlank) {
             binding.fhesSaveButton.text = getString(R.string.save)
             binding.fhesSaveButton.setOnClickListener {

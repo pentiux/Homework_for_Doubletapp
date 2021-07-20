@@ -13,7 +13,7 @@ internal const val frequencyLength = 35
 class EditViewModel : ViewModel() {
 
     private var _saveState  = MutableStateFlow(false)
-    val saveState get() = _saveState.asStateFlow()
+    val saveState = _saveState.asStateFlow()
 
     var fragmentIsBlank = false
 

@@ -38,7 +38,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/top_spacer_margrin"
-            android:layout_weight="1"
             android:hint="@string/please_enter_habit_description"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textAutoComplete|textMultiLine"
-                android:maxLines="0"
                 tools:text="Some description for descriptiong description in description" />
         </com.google.android.material.textfield.TextInputLayout>
 

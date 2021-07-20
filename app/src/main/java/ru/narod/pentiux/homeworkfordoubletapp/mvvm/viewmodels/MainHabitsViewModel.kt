@@ -45,7 +45,7 @@ class MainHabitsViewModel @Inject constructor(
         searchString = string
         if(searchJob == null) {
             searchJob = viewModelScope.launch(ioDispatcher) {
-
+                delay(100)
                 val tempList = beforeSortAndSearch.filter { it.name.contains(searchString, ignoreCase = true) }
                 updateCurrentHabitsList(tempList)
             }
