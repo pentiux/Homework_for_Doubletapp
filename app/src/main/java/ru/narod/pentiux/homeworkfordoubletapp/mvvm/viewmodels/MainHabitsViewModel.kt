@@ -3,10 +3,8 @@ package ru.narod.pentiux.homeworkfordoubletapp.mvvm.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import ru.narod.pentiux.homeworkfordoubletapp.di.coroutines.IoDispatcher
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.data.HabitCharacteristicsData
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.model.*
@@ -20,10 +18,12 @@ class MainHabitsViewModel @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _resultList = MutableStateFlow<List<HabitCharacteristicsData>>(listOf())
-    val resultList = _resultList.asStateFlow()
+    private val _resultList: MutableStateFlow<List<HabitCharacteristicsData>> = MutableStateFlow(listOf())
+    val resultList: StateFlow<List<HabitCharacteristicsData>> = _resultList.asStateFlow()
 
     private var beforeSortAndSearch = listOf<HabitCharacteristicsData>()
+    private var searchString = ""
+    private var searchJob: Job? = null
 
     val flags = mutableMapOf(
         "sortByName" to false,
@@ -36,13 +36,26 @@ class MainHabitsViewModel @Inject constructor(
         viewModelScope.launch(ioDispatcher) {
             getAllHabits().collect {
                 beforeSortAndSearch = it
-                _resultList.value = sortList(it)
+                updateCurrentHabitsList(it)
             }
         }
     }
 
-    fun updateHabitsList(){
-        _resultList.value = sortList(_resultList.value)
+    fun searchByName(string: String) {
+        searchString = string
+        if(searchJob == null) {
+            searchJob = viewModelScope.launch(ioDispatcher) {
+
+                val tempList = beforeSortAndSearch.filter { it.name.contains(searchString, ignoreCase = true) }
+                updateCurrentHabitsList(tempList)
+            }
+            searchJob?.let { searchJob = null}
+        }
+    }
+
+    fun updateCurrentHabitsList(list: List<HabitCharacteristicsData> = beforeSortAndSearch) {
+        if (flags.containsValue(true)) _resultList.value = sortList(list)
+        else _resultList.value = list
     }
 
     suspend fun deleteHabit(habit: HabitCharacteristicsData): ModelState = withContext(ioDispatcher) {
@@ -56,8 +69,7 @@ class MainHabitsViewModel @Inject constructor(
         habitModel.updateHabit(habit)
     }
 
-    private fun sortList(list: List<HabitCharacteristicsData>): List<HabitCharacteristicsData> {
-        return if (flags.containsValue(true))
+    private fun sortList(list: List<HabitCharacteristicsData>): List<HabitCharacteristicsData> =
         list.sortedWith(
             compareBy (
                 { habit -> if (flags["sortByName"]!!) habit.name else 0 },
@@ -65,8 +77,6 @@ class MainHabitsViewModel @Inject constructor(
                 { habit -> if (flags["sortByPriority"]!!) habit.priority else 0 },
                 { habit -> if (flags["sortByColor"]!!) habit.color else 0 })
         )
-        else beforeSortAndSearch
-    }
 
     private fun getAllHabits(): Flow<List<HabitCharacteristicsData>> = habitModel.getAllHabits()
 }

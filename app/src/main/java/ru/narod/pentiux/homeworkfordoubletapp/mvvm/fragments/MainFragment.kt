@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.retry
 import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.FragmentMainBinding
 import ru.narod.pentiux.homeworkfordoubletapp.mvvm.viewmodels.MainHabitsViewModel
@@ -48,28 +48,33 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding.includeBottomSheet.fabCreateNewHabit.setOnClickListener {
             goToHabitEditor(HabitCharacteristicsData.getEmptyHabit())
         }
-        setClickListeners()
+        setListeners()
     }
 
-    private fun setClickListeners() {
+    private fun setListeners() {
+        binding.includeBottomSheet.searchEdit.doAfterTextChanged {
+            if (it != null) {
+                viewModel.searchByName(it.toString())
+            } else viewModel.updateCurrentHabitsList()
+        } // search by name string
         with(binding.includeBottomSheet) {
             sortByName.setOnClickListener {
                 viewModel.flags["sortByName"] = sortByName.isChecked
-                viewModel.updateHabitsList()
+                viewModel.updateCurrentHabitsList()
             }
             sortByType.setOnClickListener {
                 viewModel.flags["sortByType"] = sortByType.isChecked
-                viewModel.updateHabitsList()
+                viewModel.updateCurrentHabitsList()
             }
             sortByPriority.setOnClickListener {
                 viewModel.flags["sortByPriority"]  = sortByPriority.isChecked
-                viewModel.updateHabitsList()
+                viewModel.updateCurrentHabitsList()
             }
             sortByColor.setOnClickListener {
                 viewModel.flags["sortByColor"]  = sortByColor.isChecked
-                viewModel.updateHabitsList()
+                viewModel.updateCurrentHabitsList()
             }
-        }
+        } // bottom sheet toggle sort buttons
     }
 
     private fun goToHabitEditor(habit: HabitCharacteristicsData) {
