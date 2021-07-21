@@ -7,14 +7,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import ru.narod.pentiux.homeworkfordoubletapp.R
 import ru.narod.pentiux.homeworkfordoubletapp.databinding.FragmentHabitEditorScreenBinding
 import ru.narod.pentiux.homeworkfordoubletapp.di.coroutines.ApplicationScope
@@ -55,7 +53,7 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentHabitEditorScreenBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        viewModel.editorHabit = args.habitCharacteristics
+        viewModel.editorHabit = args.habitCharacteristics.copy()
         setDoAfterTextChanged()
         fragmentInitialization()
 
@@ -74,15 +72,13 @@ class HabitEditorScreenFragment : Fragment(R.layout.fragment_habit_editor_screen
         saveEditInitializing()
     }
 
-    private fun fragmentInitialization(){
-        with(args.habitCharacteristics) {
-            if (id == 0) {
-                viewModel.fragmentIsBlank = true
-                setSpinnerAndRadio(viewModel.editorHabit)
-            } else {
-                viewModel.fragmentIsBlank = false
-                fillAllFields(viewModel.editorHabit)
-            }
+    private fun fragmentInitialization() {
+        if (args.habitCharacteristics.id == 0) {
+            viewModel.fragmentIsBlank = true
+            setSpinnerAndRadio(viewModel.editorHabit)
+        } else {
+            viewModel.fragmentIsBlank = false
+            fillAllFields(viewModel.editorHabit)
         }
         checkDescription()
         checkFrequency()
